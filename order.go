@@ -17,6 +17,7 @@ const (
 	kOrderQuery   = "/pay/orderquery"
 	kCloseOrder   = "/pay/closeorder"
 	kDownloadBill = "/pay/downloadbill"
+	KMTransfer    = "/mmpaymkttransfers/promotion/transfers"
 )
 
 // UnifiedOrder https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1
@@ -201,5 +202,13 @@ func (this *Client) DownloadBill(param DownloadBillParam) (result *DownloadBillR
 		result.Data = data
 	}
 
+	return result, err
+}
+
+// Transfer https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_2
+func (this *Client) Transfer(param TransferParam) (result *TransferRsp, err error) {
+	if err = this.doRequest("POST", this.BuildAPI(KMTransfer), param, &result); err != nil {
+		return nil, err
+	}
 	return result, err
 }

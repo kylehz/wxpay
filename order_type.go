@@ -229,3 +229,51 @@ type DownloadBillRsp struct {
 	ReturnMsg  string `xml:"return_msg"`
 	Data       []byte `xml:"-"`
 }
+
+// TransferParam  https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_2
+type TransferParam struct {
+	MchAppId       string
+	MchId          string
+	DeviceInfo     string
+	NonceStr       string
+	Sign           string
+	PartnerTradeNo string
+	OpenId         string
+	CheckName      string
+	ReUserName     string
+	Amount         int
+	Desc           string
+	SpbillCreateIp string
+}
+
+func (this TransferParam) Params() url.Values {
+	var m = make(url.Values)
+	m.Set("mch_appid", this.MchAppId)
+	m.Set("mchid", this.MchId)
+	m.Set("device_info", this.DeviceInfo)
+	m.Set("nonce_str", this.NonceStr)
+	m.Set("sign", this.Sign)
+	m.Set("partner_trade_no", this.PartnerTradeNo)
+	m.Set("openid", this.OpenId)
+	m.Set("check_name", this.CheckName)
+	m.Set("re_user_name", this.ReUserName)
+	m.Set("amount", fmt.Sprintf("%d", this.Amount))
+	m.Set("desc", this.Desc)
+	m.Set("spbill_create_ip", this.SpbillCreateIp)
+	return m
+}
+
+type TransferRsp struct {
+	ReturnCode     string `xml:"return_code"`
+	ReturnMsg      string `xml:"return_msg"`
+	MchAppId       string `xml:"mch_appid"`
+	MchId          string `xml:"mchid"`
+	DeviceInfo     string `xml:"device_info"`
+	NonceStr       string `xml:"nonce_str"`
+	ResultCode     string `xml:"result_code"`
+	ErrCode        string `xml:"err_code"`
+	ErrCodeDes     string `xml:"err_code_des"`
+	PartnerTradeNo string `xml:"partner_trade_no"`
+	PaymentNo      string `xml:"payment_no"`
+	PaymentTime    string `xml:"payment_time"`
+}
