@@ -248,7 +248,6 @@ func (this TransferParam) Params() url.Values {
 	var m = make(url.Values)
 	m.Set("mch_appid", this.MchAppId)
 	m.Set("mchid", this.MchId)
-	m.Set("device_info", this.DeviceInfo)
 	m.Set("nonce_str", this.NonceStr)
 	m.Set("sign", this.Sign)
 	m.Set("partner_trade_no", this.PartnerTradeNo)
@@ -264,7 +263,6 @@ type TransferRsp struct {
 	ReturnMsg      string `xml:"return_msg"`
 	MchAppId       string `xml:"mch_appid"`
 	MchId          string `xml:"mchid"`
-	DeviceInfo     string `xml:"device_info"`
 	NonceStr       string `xml:"nonce_str"`
 	ResultCode     string `xml:"result_code"`
 	ErrCode        string `xml:"err_code"`
