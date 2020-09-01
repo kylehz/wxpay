@@ -147,7 +147,8 @@ func (this *Client) doRequestWithClient(client *http.Client, method, url string,
 		return nil, err
 	}
 
-	req, err := http.NewRequest(method, url, strings.NewReader(URLValueToXML(p)))
+	xml := URLValueToXML(p)
+	req, err := http.NewRequest(method, url, strings.NewReader(xml))
 	if err != nil {
 		return nil, err
 	}
