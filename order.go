@@ -207,7 +207,7 @@ func (this *Client) DownloadBill(param DownloadBillParam) (result *DownloadBillR
 
 // Transfer https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_2
 func (this *Client) Transfer(param TransferParam) (result *TransferRsp, err error) {
-	if err = this.doRequest("POST", this.BuildAPI(KMTransfer), param, &result); err != nil {
+	if err = this.doRequestWithTLS("POST", this.BuildAPI(KMTransfer), param, &result); err != nil {
 		return nil, err
 	}
 	return result, err
