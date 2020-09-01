@@ -240,10 +240,8 @@ type TransferParam struct {
 	PartnerTradeNo string
 	OpenId         string
 	CheckName      string
-	ReUserName     string
 	Amount         int
 	Desc           string
-	SpbillCreateIp string
 }
 
 func (this TransferParam) Params() url.Values {
@@ -256,10 +254,8 @@ func (this TransferParam) Params() url.Values {
 	m.Set("partner_trade_no", this.PartnerTradeNo)
 	m.Set("openid", this.OpenId)
 	m.Set("check_name", this.CheckName)
-	m.Set("re_user_name", this.ReUserName)
 	m.Set("amount", fmt.Sprintf("%d", this.Amount))
 	m.Set("desc", this.Desc)
-	m.Set("spbill_create_ip", this.SpbillCreateIp)
 	return m
 }
 
