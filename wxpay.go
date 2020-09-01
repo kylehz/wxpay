@@ -106,10 +106,14 @@ func (this *Client) LoadCertFromBase64(cert string) (err error) {
 
 func (this *Client) URLValues(param Param, key string) (value url.Values, err error) {
 	var p = param.Params()
-	if appId := p.Get("appid"); appId == "" {
-		p.Set("appid", this.appId)
+	if MchAppId := p.Get("mch_appid"); MchAppId == "" {
+		if appId := p.Get("appid"); appId == "" {
+			p.Set("appid", this.appId)
+		}
 	}
-	p.Set("mch_id", this.mchId)
+	if mchID := p.Get("mchid"); mchID == "" {
+		p.Set("mch_id", this.mchId)
+	}
 	p.Set("nonce_str", GetNonceStr())
 
 	if _, ok := p["notify_url"]; ok == false {
