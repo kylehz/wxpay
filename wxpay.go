@@ -321,16 +321,15 @@ func VerifyResponseValues(param url.Values, key string) (bool, error) {
 
 	// 验证签名
 	var sign = param.Get("sign")
-	delete(param, "sign")
-	if sign == "" {
-		return false, errors.New("签名验证失败")
+	if sign != "" {
+		delete(param, "sign")
+		var sign2 = SignMD5(param, key)
+		if sign != sign2 {
+			return false, errors.New("返回值签名验证失败")
+		}
 	}
 
-	var sign2 = SignMD5(param, key)
-	if sign == sign2 {
-		return true, nil
-	}
-	return false, errors.New("签名验证失败")
+	return true, nil
 }
 
 func GetNonceStr() (nonceStr string) {
